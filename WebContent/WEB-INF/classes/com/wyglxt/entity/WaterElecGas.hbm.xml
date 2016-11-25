@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.wyglxt.entity.WaterElecGas" table="water_elec_gas">
+		<id name="id" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="houseNo" type="java.lang.String">
+			<column name="house_no" length="50" />
+		</property>
+		<property name="floorId" type="java.lang.String">
+			<column name="floor_id" length="50" />
+		</property>
+		<property name="gas" type="double">
+			<column name="gas" />
+		</property>
+		<property name="electric" type="double">
+			<column name="electric" />
+		</property>
+		<property name="water" type="double">
+			<column name="water" />
+		</property>
+		<property name="month" type="java.util.Date">
+			<column name="month" not-null="true" />
+		</property>
+
+		<many-to-one name="house" class="com.wyglxt.entity.House"
+			column="house_uuid" property-ref="uuid" fetch="join" />
+	</class>
+</hibernate-mapping>

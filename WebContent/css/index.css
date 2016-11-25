@@ -1,0 +1,22 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	overflow: hidden;
+}
+
+.style3 {
+	color: #528311;
+	font-size: 12px;
+}
+
+.style4 {
+	color: #42870a;
+	font-size: 12px;
+}
+
+.style5 {
+	font-size: 40px;
+	color: #66CC00;
+}

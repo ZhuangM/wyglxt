@@ -1,0 +1,84 @@
+body {
+	padding: 0px;
+	margin-top: 0px;
+	font-size: 10px;
+	background-color: #ffffff;
+}
+
+#tpa {
+	color: #009933;
+	margin: 0px;
+	padding: 0px;
+	float: right;
+	padding-right: 10px;
+}
+
+#tpa dd {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	margin-right: 2px;
+}
+
+#tpa dd.ditem {
+	margin-right: 8px;
+}
+
+#tpa dd.img {
+	padding-top: 6px;
+}
+
+div.item {
+	text-align: center;
+	width: 82px;
+	height: 26px;
+	line-height: 28px;
+}
+
+.itemsel {
+	width: 80px;
+	text-align: center;
+	background: #7293B5;
+	border-left: 1px solid #c5f097;
+	border-right: 1px solid #c5f097;
+	border-top: 1px solid #c5f097;
+	height: 26px;
+	line-height: 28px;
+}
+
+a:link, a:VISITED {
+	text-decoration: underline;
+}
+
+.item a:LINK, .item a:VISITED {
+	font-size: 12px;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.itemsel a:HOVER {
+	color: #ffffff;
+	font-weight: bold;
+	border-bottom: 2px solid #E9FC65;
+}
+
+.itemsel a:LINK, .item a:VISITED {
+	font-size: 12px;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.itemsel a:HOVER {
+	color: #ffffff;
+	border-bottom: 2px solid #E9FC65;
+}
+
+.rmain {
+	padding-left: 10px;
+}
+
+.img {
+	
+}

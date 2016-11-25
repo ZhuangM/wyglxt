@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.wyglxt.entity.House" table="house">
+		<id name="id" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="uuid" type="java.lang.String">
+			<column name="uuid" length="50" />
+		</property>
+		<property name="description" type="java.lang.String">
+			<column name="description" />
+		</property>
+		<property name="houseNo" type="java.lang.String">
+			<column name="house_no" length="50" unique="true" />
+		</property>
+		<property name="ownerName" type="java.lang.String">
+			<column name="owner_name" length="50" />
+		</property>
+		<property name="ownerTel" type="java.lang.String">
+			<column name="owner_tel" length="50" />
+		</property>
+		<property name="floorId" type="java.lang.String">
+			<column name="floor_id" length="50" />
+		</property>
+		<property name="buildDate" type="java.lang.String">
+			<column name="build_date" length="50" />
+		</property>
+		<property name="shape" type="java.lang.String">
+			<column name="shape" length="50" />
+		</property>
+		<property name="area" type="java.lang.String">
+			<column name="area" length="50" />
+		</property>
+		<property name="cellId" type="java.lang.String">
+			<column name="cell_id" length="50" />
+		</property>
+
+		<set name="waterElecGas" inverse="true" fetch="select">
+			<key column="house_uuid" property-ref="uuid" />
+			<one-to-many class="com.wyglxt.entity.WaterElecGas" />
+		</set>
+		<set name="charges" inverse="true" fetch="select" lazy="true">
+			<key column="house_uuid" property-ref="uuid" />
+			<one-to-many class="com.wyglxt.entity.Charge" />
+		</set>
+		<set name="messages" inverse="true" fetch="select" lazy="true">
+			<key column="house_uuid" property-ref="uuid" />
+			<one-to-many class="com.wyglxt.entity.Message" />
+		</set>
+	</class>
+</hibernate-mapping>

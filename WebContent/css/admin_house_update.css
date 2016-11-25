@@ -1,0 +1,39 @@
+body {
+	background-color: #F3F6FA;
+}
+
+table {
+	border: 1px solid #CBD8AC;
+}
+
+tr {
+	height: 35px;
+}
+
+input {
+	height: 25px;
+}
+
+select {
+	height: 30px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#td_color {
+	background-color: #CBD8AC;
+	border: 1px solid #CBD8AC;
+	width: 15%;
+}
+
+#td_none {
+	border: 1px solid #CBD8AC;
+	width: 30%;
+}
+
+#area {
+	width: 30%;
+}

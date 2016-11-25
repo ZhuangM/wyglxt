@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.wyglxt.entity.Charge" table="charge">
+		<id name="id" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="houseNo" type="java.lang.String">
+			<column name="house_no" length="50" not-null="true" />
+		</property>
+		<property name="paymentName" type="java.lang.String">
+			<column name="payment_name" length="50" />
+		</property>
+		<property name="waterCharge" type="double">
+			<column name="water_charge" />
+		</property>
+		<property name="electricCharge" type="double">
+			<column name="electric_charge" />
+		</property>
+		<property name="gasCharge" type="double">
+			<column name="gas_charge" />
+		</property>
+		<property name="wuye" type="double">
+			<column name="wuye" />
+		</property>
+		<property name="status" type="int" />
+		<property name="means" type="int" />
+		<property name="month" type="java.util.Date">
+			<column name="month" not-null="true" />
+		</property>
+		<property name="paymentDate" type="java.util.Date">
+			<column name="payment_date" />
+		</property>
+
+		<many-to-one name="house" class="com.wyglxt.entity.House"
+			column="house_uuid" property-ref="uuid" fetch="join" />
+	</class>
+</hibernate-mapping>

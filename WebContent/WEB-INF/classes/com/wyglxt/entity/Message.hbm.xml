@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.wyglxt.entity.Message" table="message">
+		<id name="id" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="title" type="string" length="50" />
+		<property name="content" type="string" />
+		<property name="publishDate" type="java.util.Date">
+			<column name="publish_date" />
+		</property>
+		<property name="isRead" type="int">
+			<column name="is_read" />
+		</property>
+		<property name="houseNo" type="string">
+			<column name="house_no" length="50" />
+		</property>
+
+		<many-to-one name="house" column="house_uuid" class="com.wyglxt.entity.House"
+			property-ref="uuid" fetch="join" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.wyglxt.entity.Demo" table="demo">
+		<id name="id" type="java.lang.Integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="bianma" type="java.lang.String">
+			<column name="bianma" />
+		</property>
+		<property name="mingcheng" type="java.lang.String">
+			<column name="mingcheng" />
+		</property>
+		<property name="zerenren" type="java.lang.String">
+			<column name="zerenren" />
+		</property>
+		<property name="yuanzhi" type="java.lang.String">
+			<column name="yuanzhi" />
+		</property>
+		<property name="nianxian" type="java.lang.String">
+			<column name="nianxian" />
+		</property>
+
+		<property name="qiyong" type="java.util.Date">
+			<column name="qiyong" />
+		</property>
+	</class>
+</hibernate-mapping>

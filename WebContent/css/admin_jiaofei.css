@@ -1,0 +1,27 @@
+body {
+	background-color: #F3F6FA;
+}
+
+table {
+	border: 1px solid #CBD8AC;
+}
+
+tr {
+	height: 35px;
+}
+
+.td_color {
+	background-color: #CBD8AC;
+	border: 1px solid #CBD8AC;
+	width: 10%;
+}
+
+.td_none {
+	border: 1px solid #CBD8AC;
+	width: 20%;
+}
+
+#shoufeidan {
+	font-weight: bold;
+	font-size: 20px;
+}

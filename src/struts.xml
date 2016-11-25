@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!--解决乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+
+	<!-- default package -->
+	<package name="default" namespace="/" extends="json-default">
+
+		<!-- 全局结果集 -->
+		<global-results>
+			<result name="error">/error.html</result>
+			<result name="exception">/exception.html</result>
+		</global-results>
+
+		<action name="test" class="com.wyglxt.action.TestAction" />
+		
+		<!-- demo -->
+		<action name="demo_*" class="com.wyglxt.action.DemoAction"
+			method="{1}">
+			<result name="list_success">/demo/demo_list.jsp</result>
+			<result name="load_success">/demo/demo_update.jsp</result>
+			<result name="delete_success" type="chain">demo_list</result>
+			<!-- 返回json类型数据 -->
+			<result name="{1}_resp" type="json">
+				<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 登录 -->
+		<action name="login" class="com.wyglxt.action.LoginAction">
+			<result name="owner_success">/owner/index.jsp</result>
+			<result name="admin_success">/admin/index.jsp</result>
+			<result name="super_admin_success">/ow/index.jsp</result>
+			<result name="login_error">/index.html</result>
+		</action>
+
+		<!-- 账户 -->
+		<action name="account_*" class="com.wyglxt.action.AccountAction"
+			method="{1}">
+			<result name="alter_success">/admin/alterSuccess.jsp</result>
+			<result name="delete_success" type="chain">redirect_ow_admin_query
+			</result>
+			<result name="load_success">/ow/admin_update.jsp</result>
+			<result name="error">/error.html</result>
+			<result name="{1}_resp" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 房产 -->
+		<action name="house_*" class="com.wyglxt.action.HouseAction"
+			method="{1}">
+			<result name="list_success">/admin/house_list.jsp</result>
+			<result name="load_success">/admin/house_update.jsp</result>
+			<result name="delete_success" type="chain">house_list</result>
+			<!-- 返回json类型数据 -->
+			<result name="{1}_resp" type="json">
+				<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 业主 -->
+		<action name="owner_*" class="com.wyglxt.action.OwnerAction"
+			method="{1}">
+			<result name="list_success">/admin/owner_list.jsp</result>
+			<result name="load_success">/admin/owner_update.jsp</result>
+			<result name="delete_success" type="chain">owner_list</result>
+			<result name="{1}_resp" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 缴费 -->
+		<action name="charge_*" class="com.wyglxt.action.ChargeAction"
+			method="{1}">
+			<result name="{1}_resp" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 收费标准 -->
+		<action name="price_*" class="com.wyglxt.action.PriceAction"
+			method="{1}">
+			<result name="{1}_resp" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 月用量 -->
+		<action name="waterElecGas_*" class="com.wyglxt.action.WaterElecGasAction"
+			method="{1}">
+			<result name="{1}_resp" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 公告 -->
+		<action name="announce_*" class="com.wyglxt.action.AnnounceAction"
+			method="{1}">
+			<result name="{1}_resp" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- 重定向 -->
+		<action name="redirect_*_*">
+			<result type="dispatcher">/{1}/{2}.jsp</result>
+		</action>
+
+		<!-- 注销登录 -->
+		<action name="clear" class="com.wyglxt.action.ClearAction">
+			<result name="success">/index.html</result>
+		</action>
+	</package>
+
+</struts>

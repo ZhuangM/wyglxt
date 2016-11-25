@@ -1,0 +1,23 @@
+.ta{
+	text-align: center;
+	border: 1px solid black;
+	background-color: #F3F6FA;
+}
+.title{
+	height: 5%; 
+	background-color: #7293B5;
+	font-size: 20px;
+	font-weight: bold;
+}
+.nav{
+	/*height: 6.8%*/
+}
+/*超链接样式*/
+a:link{
+	text-decoration: none;
+	color:black;
+}
+a:HOVER {
+	text-decoration:underline;
+	color:red;
+}

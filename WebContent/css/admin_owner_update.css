@@ -1,0 +1,31 @@
+tr {
+	height: 35px;
+}
+
+input {
+	height: 25px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#td_color {
+	background-color: #CBD8AC;
+	border: 1px solid #CBD8AC;
+	width: 15%;
+}
+
+#td_none {
+	border: 1px solid #CBD8AC;
+	width: 30%;
+}
+
+#example {
+	color: red;
+}
+
+#houseNo {
+	width: 50%;
+}

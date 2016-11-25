@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- 开启spring的Annotation注解处理器 -->
+	<context:annotation-config />
+	<!-- 开启spring的Bean自动扫描机制来查找和管理Bean实例 -->
+	<context:component-scan base-package="com.wyglxt" />
+
+	<!-- 读取properties文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置数据源bean，使用C3P0数据源实现 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>${driverClass}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${jdbcUrl}</value>
+		</property>
+		<property name="user">
+			<value>${user}</value>
+		</property>
+		<property name="password">
+			<value>${password}</value>
+		</property>
+		<!-- 指定数据库连接池的最大连接数 -->
+		<property name="maxPoolSize" value="40"></property>
+		<!-- 指定数据库连接池的最小连接数 -->
+		<property name="minPoolSize" value="1"></property>
+		<!-- 指定数据库连接池的初始化连接数 -->
+		<property name="initialPoolSize" value="1"></property>
+		<!-- 指定连接数据库连接池的连接的最大空闲时间 -->
+		<property name="maxIdleTime" value="20"></property>
+	</bean>
+
+	<!-- 定义了Hibernate的SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/wyglxt/entity/Owner.hbm.xml</value>
+				<value>com/wyglxt/entity/House.hbm.xml</value>
+				<value>com/wyglxt/entity/WaterElecGas.hbm.xml</value>
+				<value>com/wyglxt/entity/Charge.hbm.xml</value>
+				<value>com/wyglxt/entity/Announce.hbm.xml</value>
+				<value>com/wyglxt/entity/Message.hbm.xml</value>
+				<value>com/wyglxt/entity/Account.hbm.xml</value>
+				<value>com/wyglxt/entity/Price.hbm.xml</value>
+				<value>com/wyglxt/entity/Demo.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.jdbc.fetch.size">50</prop>
+				<prop key="hibernate.batch_size">50</prop>
+				<!-- 链接释放策略 on_close | after_transaction | after_statement | auto -->
+				<prop key="hibernate.connection.release_mode">after_transaction</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 事务管理器，注入sessionFactory -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="query*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="merge*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="put*" propagation="REQUIRED" />
+			<tx:method name="use*" propagation="REQUIRED" />
+			<tx:method name="upload*" propagation="REQUIRED" />
+			<tx:method name="bind*" propagation="REQUIRED" />
+			<tx:method name="read*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="count*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="list*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="convert*" propagation="REQUIRED"
+				read-only="true" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.wyglxt.base.BaseServiceImpl.*(..))"
+			id="txPointcut1" />
+		<aop:pointcut expression="execution(* com.wyglxt.service.impl.*.*(..))"
+			id="txPointcut2" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut1"
+			order="101" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut2"
+			order="102" />
+	</aop:config>
+
+	<!-- spring工具类 -->
+	<bean name="springContextHolder" class="com.wyglxt.util.SpringContextHolder"></bean>
+
+</beans>
